@@ -9,7 +9,7 @@ image:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 before_script:
-    - cat backend.tfvars
+
     - echo address = ${state_address}  >> backend.tfvars
     - echo lock_address = ${lock_address}  >> backend.tfvars
     - echo unlock_address = ${unlock_address}  >> backend.tfvars
