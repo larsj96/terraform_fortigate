@@ -1,4 +1,4 @@
-hostname = "192.168.13.1:444"
+hostname = "10.0.0.97:444"
 
 system_interfaces = {
   HP1_ILO = {
