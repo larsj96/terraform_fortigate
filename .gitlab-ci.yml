@@ -10,10 +10,11 @@ image:
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 before_script:
     - cat backend.tfvars
-    - echo address = ${STATE_ADDRESS}  >> backend.tfvars
-    - echo lock_address = ${LOCK_ADDRESS}  >> backend.tfvars
-    - echo unlock_address = ${UNLOCK_ADDRESS}  >> backend.tfvars
-    - echo username = ${USERNAME}  >> backend.tfvars
+    - echo address = ${state_address}  >> backend.tfvars
+    - echo lock_address = ${lock_address}  >> backend.tfvars
+    - echo unlock_address = ${unlock_address}  >> backend.tfvars
+    - echo username = ${username}  >> backend.tfvars
+    - echo password = ${password}  >> backend.tfvars
     - terraform --version
     - terraform init -backend-config=backend.tfvars
     
