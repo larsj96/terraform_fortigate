@@ -1,0 +1,47 @@
+stages:
+  - validate
+  - plan
+  - apply
+  - destroy
+image:
+  name: hashicorp/terraform:latest
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+before_script:
+    - cat backend.tfvars
+    - echo address = ${STATE_ADDRESS}  >> backend.tfvars
+    - echo lock_address = ${LOCK_ADDRESS}  >> backend.tfvars
+    - echo unlock_address = ${UNLOCK_ADDRESS}  >> backend.tfvars
+    - echo username = ${USERNAME}  >> backend.tfvars
+    - terraform --version
+    - terraform init -backend-config=backend.tfvars
+    
+validate:
+  stage: validate
+  script:
+    - terraform validate
+plan:
+  stage: plan
+  script:
+    - terraform plan -out "planfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - planfile
+apply:
+  stage: apply
+  script:
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
+  when: manual
+
+destroy:
+  stage: destroy
+  script: 
+    - terraform destroy -auto-approve
+  dependencies:
+    - apply
+  when: manual 
