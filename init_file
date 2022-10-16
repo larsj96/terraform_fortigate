@@ -1,10 +1,9 @@
 #! /bin/bash
 TF_USERNAME=${username} \
 TF_PASSWORD=${password} \
-FORTIOS_ACCESS_TOKEN = ${fortigate_token} \
-FORTIOS_ACCESS_HOSTNAME = "10.0.0.97"
-FORTIOS_INSECURE ="false"
-
+#FORTIOS_ACCESS_TOKEN = ${fortigate_token} \
+#FORTIOS_ACCESS_HOSTNAME = "10.0.0.97"
+#FORTIOS_INSECURE ="false"
 TF_ADDRESS= ${state_address} \
 
 terraform init \

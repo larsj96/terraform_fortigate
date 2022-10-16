@@ -8,22 +8,21 @@ image:
   entrypoint:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-before_script:
-
-    - echo address = ${state_address}  >> backend.tfvars
-    - echo lock_address = ${lock_address}  >> backend.tfvars
-    - echo unlock_address = ${unlock_address}  >> backend.tfvars
-    - echo username = ${username}  >> backend.tfvars
-    - echo password = ${password}  >> backend.tfvars
-    - terraform --version
-    - terraform init -backend-config=backend.tfvars
     
 validate:
   stage: validate
   script:
-    - terraform validate
+   - chmod +x init_file
+   - ./init_file
+   - terraform validate
+
+
 plan:
   stage: plan
+  before_script:
+    - export FORTIOS_ACCESS_TOKEN=${fortigate_token}
+    - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
+    - export FORTIOS_INSECURE ="true"
   script:
     - terraform plan -out "planfile"
   dependencies:
@@ -31,6 +30,7 @@ plan:
   artifacts:
     paths:
       - planfile
+  
 apply:
   stage: apply
   script:
@@ -45,4 +45,4 @@ destroy:
     - terraform destroy -auto-approve
   dependencies:
     - apply
-  when: manual 
+  when: manual
