@@ -12,8 +12,6 @@ image:
 validate:
   stage: validate
   script:
-   - chmod +x init_file
-   - ./init_file
    - terraform validate
    - export
 
