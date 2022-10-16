@@ -15,6 +15,7 @@ validate:
    - chmod +x init_file
    - ./init_file
    - terraform validate
+   - export
 
 
 plan:
@@ -25,6 +26,7 @@ plan:
     - export FORTIOS_INSECURE ="true"
   script:
     - terraform plan -out "planfile"
+    - export
   dependencies:
     - validate
   artifacts:
@@ -35,6 +37,7 @@ apply:
   stage: apply
   script:
     - terraform apply -input=false "planfile"
+    - export
   dependencies:
     - plan
   when: manual
@@ -43,6 +46,7 @@ destroy:
   stage: destroy
   script: 
     - terraform destroy -auto-approve
+    - export
   dependencies:
     - apply
   when: manual
