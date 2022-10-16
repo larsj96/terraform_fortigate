@@ -13,8 +13,8 @@ before_script:
   - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
   - export FORTIOS_INSECURE="true"
   - export TF_ADDRESS=${state_address}
-  - export TF_USERNAME=${username}
-  - export TF_PASSWORD=${password}
+  - export TF_HTTP_USERNAME=${username}
+  - export TF_HTTP_PASSWORD=${password}
   - export TF_HTTP_ADDRESS=${state_address}
   - rm -rf .terraform
   - terraform --version
