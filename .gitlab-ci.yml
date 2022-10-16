@@ -1,46 +1,36 @@
 stages:
-  - iac_validate
-  - iac_plan
-  - iac_apply
-
-default:
-  image:
-    name: hashicorp/terraform:latest
-    entrypoint:
-      - /usr/bin/env
-      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-  before_script:
-    - sudo -i
-    - terraform init
-  
-terraform_validate:
-  stage: iac_validate
+  - validate
+  - plan
+  - apply
+image:
+  name: hashicorp/terraform:light
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+before_script:
+  - export FORTIOS_ACCESS_TOKEN=${fortigate_token}
+  - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
+  - export FORTIOS_INSECURE ="true"
+  - rm -rf .terraform
+  - terraform --version
+  - terraform init
+validate:
+  stage: validate
   script:
     - terraform validate
-  except:
-    refs:
-      - master
-
-terraform_plan:
-  stage: iac_plan
-  script: 
-    - terraform plan --out plan
-    - export FORTIOS_ACCESS_TOKEN=${fortigate_token}
-    - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
-    - export FORTIOS_INSECURE ="true"
-  only:
-    refs:
-      - master
+plan:
+  stage: plan
+  script:
+    - terraform plan -out "planfile"
+  dependencies:
+    - validate
   artifacts:
     paths:
-      - plan
-
-terraform_apply:
-  stage: iac_apply
+      - planfile
+apply:
+  stage: apply
   script:
-    - terraform apply --auto-approve plan
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
   when: manual
-  allow_failure: false
-  only:
-    refs:
-      - master
