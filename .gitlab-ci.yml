@@ -1,50 +1,45 @@
 stages:
-  - validate
-  - plan
-  - apply
-  - destroy
-image:
-  name: hashicorp/terraform:latest
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-    
-validate:
-  stage: validate
-  script:
-   - terraform validate
-   - export
+  - iac_validate
+  - iac_plan
+  - iac_apply
 
-
-plan:
-  stage: plan
+default:
+  image:
+    name: hashicorp/terraform:latest
+    entrypoint:
+      - /usr/bin/env
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   before_script:
+    - terraform init
+  
+terraform_validate:
+  stage: iac_validate
+  script:
+    - terraform validate
+  except:
+    refs:
+      - master
+
+terraform_plan:
+  stage: iac_plan
+  script: 
+    - terraform plan --out plan
     - export FORTIOS_ACCESS_TOKEN=${fortigate_token}
     - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
     - export FORTIOS_INSECURE ="true"
-  script:
-    - terraform plan -out "planfile"
-    - export
-  dependencies:
-    - validate
+  only:
+    refs:
+      - master
   artifacts:
     paths:
-      - planfile
-  
-apply:
-  stage: apply
-  script:
-    - terraform apply -input=false "planfile"
-    - export
-  dependencies:
-    - plan
-  when: manual
+      - plan
 
-destroy:
-  stage: destroy
-  script: 
-    - terraform destroy -auto-approve
-    - export
-  dependencies:
-    - apply
+terraform_apply:
+  stage: iac_apply
+  script:
+    - terraform apply --auto-approve plan
   when: manual
+  allow_failure: false
+  only:
+    refs:
+      - master
