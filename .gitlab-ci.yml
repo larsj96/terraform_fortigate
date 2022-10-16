@@ -8,14 +8,15 @@ image:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 before_script:
+  - export
   - export FORTIOS_ACCESS_TOKEN=${fortigate_token}
   - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
   - export FORTIOS_INSECURE="true"
-  - export address=${state_address}
+  - export TF_ADDRESS=${state_address}
   - export lock_address=${state_address}/lock
   - export unlock_address=${state_address}/lock
-  - export username=${username}
-  - export password=${password}
+  - export TF_USERNAME=${username}
+  - export TF_PASSWORD=${password}
   - rm -rf .terraform
   - terraform --version
   - terraform init
