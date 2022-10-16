@@ -2,15 +2,17 @@
 TF_USERNAME=${username} \
 TF_PASSWORD=${password} \
 FORTIOS_ACCESS_TOKEN = ${fortigate_token} \
-FORTIOS_ACCESS_HOSTNAME = 10.0.0.97
+FORTIOS_ACCESS_HOSTNAME = "10.0.0.97"
+FORTIOS_INSECURE ="false"
+
 TF_ADDRESS= ${state_address} \
 
 terraform init \
   -backend-config=address=${TF_ADDRESS} \
   -backend-config=lock_address=${TF_ADDRESS}/lock \
   -backend-config=unlock_address=${TF_ADDRESS}/lock \
-  -backend-config=username=${TF_USERNAME} \
-  -backend-config=password=${TF_PASSWORD} \
+  -backend-config=username=${username} \
+  -backend-config=password=${password} \
   -backend-config=lock_method=POST \
   -backend-config=unlock_method=DELETE \
   -backend-config=retry_wait_min=5
