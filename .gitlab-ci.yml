@@ -13,8 +13,6 @@ before_script:
   - export FORTIOS_ACCESS_HOSTNAME=${fortigate_hostname}
   - export FORTIOS_INSECURE="true"
   - export TF_ADDRESS=${state_address}
-  - export lock_address=${state_address}/lock
-  - export unlock_address=${state_address}/lock
   - export TF_USERNAME=${username}
   - export TF_PASSWORD=${password}
   - export TF_HTTP_ADDRESS=${state_address}
