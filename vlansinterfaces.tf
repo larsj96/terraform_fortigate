@@ -33,11 +33,11 @@ locals {
     # number 3 available for future expansion
   }
   subnett = {
-    k8s         = 1
-    dns         = 2
-    bastion     = 3
-    gitlab      = 4
-    vmware      = 5
+    k8s     = 1
+    dns     = 2
+    bastion = 3
+    gitlab  = 4
+    vmware  = 5
   }
 
   base_cidr_block = "10.0.0.0/16"
@@ -87,6 +87,6 @@ resource "fortios_system_interface" "vlan_cidr_calc" {
   mode        = "static"
   description = "Created by Terraform Provider for FortiOS"
 
-  interface   = "switches"
+  interface             = "switches"
   device_identification = "enable"
 }

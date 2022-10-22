@@ -9,7 +9,4 @@ resource "fortios_system_interface" "if" {
   vdom        = "root"
   alias       = each.key
   description = "Created by Terraform"
-
 }
-
-

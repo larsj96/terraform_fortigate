@@ -68,7 +68,7 @@ resource "fortios_firewall_policy" "wifi_switches" {
   }
 
   dstintf {
-    name = fortios_system_switchinterface.switches.name
+    name = "switches"
   }
 
   service {
@@ -293,7 +293,7 @@ resource "fortios_firewall_policy" "alt_til_influxdbz" {
   }
 
   depends_on = [
-fortios_firewallservice_custom.influxdb
+    fortios_firewallservice_custom.influxdb
   ]
 }
 
@@ -310,7 +310,7 @@ resource "fortios_firewall_policy" "alt_til_alt_icmp" {
 
   dynamic "dstintf" {
     for_each = fortios_system_interface.vlan_cidr_calc
-    
+
     content {
       name = dstintf.value.id
     }

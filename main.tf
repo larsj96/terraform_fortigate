@@ -2,13 +2,13 @@
 terraform {
   required_providers {
     fortios = {
-      source = "fortinetdev/fortios"
+      source  = "fortinetdev/fortios"
       version = "1.16.0"
     }
   }
 
- backend "http" {
- }
+  backend "http" {
+  }
 
 }
 
@@ -18,4 +18,4 @@ provider "fortios" {
 
 
 
-    
+

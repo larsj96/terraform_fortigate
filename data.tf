@@ -1,3 +1,15 @@
+
+data "fortios_system_interfacelist" "ilo_idrac" {
+  filter = "alias=@IDRAC,alias=@ILO"
+}
+
+
+data "fortios_system_interfacelist" "switches" {
+  filter = "alias=@mikrotik,alias=@xyzel"
+}
+
+
+
 # data "http" "terraform_cloud" {
 #   url = "https://app.terraform.io/api/meta/ip-ranges"
 
@@ -17,5 +29,7 @@
 # output "tf_ips" {
 #   value = local.tf_ips
 # }
+
+
 
 

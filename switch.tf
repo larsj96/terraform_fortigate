@@ -2,72 +2,37 @@
 
 # ##
 
-data "fortios_system_interfacelist" "ilo_idrac" {
-  filter = "alias=@IDRAC,alias=@ILO"
-}
 
-resource "fortios_system_switchinterface" "idrac_ilo" {
-  name = "idrac_Ilo"
-  vdom = "root"
-  type = "switch"
+# resource "fortios_system_switchinterface" "idrac_ilo" {
+#   name = "idrac_Ilo"
+#   vdom = "root"
+#   type = "switch"
 
-  dynamic "member" {
-    for_each = data.fortios_system_interfacelist.ilo_idrac.namelist
+#   dynamic "member" {
+#     for_each = data.fortios_system_interfacelist.ilo_idrac.namelist
 
-    content {
-      interface_name = member.value
-    }
-
-  }
-}
+#     content {
+#       interface_name = member.value
+#     }
+#   }
+# }
 
 
+# resource "fortios_system_switchinterface" "switches" {
+#   name = "switches"
+#   vdom = "root"
+#   type = "switch"
 
-data "fortios_system_interfacelist" "switches" {
-  filter = "alias=@mikrotik,alias=@xyzel"
-}
+#   dynamic "member" {
+#     for_each = data.fortios_system_interfacelist.switches.namelist
 
+#     content {
+#       interface_name = member.value
+#     }
+#   }
 
-resource "fortios_system_switchinterface" "switches" {
-  name = "switches"
-  vdom = "root"
-  type = "switch"
+#   depends_on = [
+#     fortios_system_interface.if
+#    ]
 
-  dynamic "member" {
-    for_each = data.fortios_system_interfacelist.switches.namelist
-
-    content {
-      interface_name = member.value
-    }
-  }
-
-  depends_on = [
-    fortios_system_interface.if
-   ]
-
- }
-
-
-
-# # This is setting the IP on the switch interface above ^^ - breaks whole terraform code.. 
-
-
-# # resource "fortios_system_interface" "idrac_ilo_ip" {
-# #   name                  = "idrac_Ilo"
-# #   ip                    = "172.16.3.1 255.255.255.0"
-# #  #ip                    = "0.0.0.0 0.0.0.0"
-
-# #   device_identification = "enable"
-# #   mode                  = "static"
-# #   type                  = "physical"
-# #   vdom                  = "root"
-# #   alias                 = "idrac_Ilo"
-
-# #   depends_on = [
-# #     fortios_system_interface.if
-# #    ]
-
-
-# # }
-
-# # This is setting the IP on the switch interface: idrac_ilo above ^^ - breaks whole terraform code after 2nd apply...
+#  }

@@ -37,7 +37,6 @@
 # }
 
 
-
 # resource "fortios_firewall_address" "test_from_tf_rest_api" {
 # #  for_each = local.tf_ips.vcs
 
