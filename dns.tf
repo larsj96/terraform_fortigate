@@ -9,6 +9,17 @@ resource "fortios_system_dnsserver" "vmware" {
   ]
 }
 
+
+# setting bastion VLAN / interface as recursive :-)
+resource "fortios_system_dnsserver" "bastion" {
+  mode              = "recursive"
+  name              = "bastion"
+
+  depends_on = [
+    fortios_system_interface.vlan_cidr_calc
+  ]
+}
+
 resource "fortios_system_dnsdatabase" "mgmt" {
     authoritative = "enable"
     contact       = "hostmaster"
