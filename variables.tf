@@ -1,23 +1,10 @@
 
-# variable "system_interfaces" {
+variable "system_interfaces" {
 
-#   type = map(any)
+  type = map(any)
 
-#   default = {}
+  default = {}
 
-# }
+}
 
-# variable "vlan_interfaces" {
 
-#   type = map(any)
-#   default = {}
-
-# }
-
-# variable "policy_fwrule" {
-
-#   type = map(any)
-
-#   default = {}
-
-# }

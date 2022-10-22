@@ -2,50 +2,50 @@
 
 # ##
 
-# data "fortios_system_interfacelist" "ilo_idrac" {
-#   filter = "alias=@IDRAC,alias=@ILO"
-# }
+data "fortios_system_interfacelist" "ilo_idrac" {
+  filter = "alias=@IDRAC,alias=@ILO"
+}
 
-# resource "fortios_system_switchinterface" "idrac_ilo" {
-#   name = "idrac_Ilo"
-#   vdom = "root"
-#   type = "switch"
+resource "fortios_system_switchinterface" "idrac_ilo" {
+  name = "idrac_Ilo"
+  vdom = "root"
+  type = "switch"
 
-#   dynamic "member" {
-#     for_each = data.fortios_system_interfacelist.ilo_idrac.namelist
+  dynamic "member" {
+    for_each = data.fortios_system_interfacelist.ilo_idrac.namelist
 
-#     content {
-#       interface_name = member.value
-#     }
+    content {
+      interface_name = member.value
+    }
 
-#   }
-# }
-
-
-
-# data "fortios_system_interfacelist" "switches" {
-#   filter = "alias=@mikrotik,alias=@xyzel"
-# }
+  }
+}
 
 
-# resource "fortios_system_switchinterface" "switches" {
-#   name = "switches"
-#   vdom = "root"
-#   type = "switch"
 
-#   dynamic "member" {
-#     for_each = data.fortios_system_interfacelist.switches.namelist
+data "fortios_system_interfacelist" "switches" {
+  filter = "alias=@mikrotik,alias=@xyzel"
+}
 
-#     content {
-#       interface_name = member.value
-#     }
-#   }
 
-#   depends_on = [
-#     fortios_system_interface.if
-#    ]
+resource "fortios_system_switchinterface" "switches" {
+  name = "switches"
+  vdom = "root"
+  type = "switch"
 
-# }
+  dynamic "member" {
+    for_each = data.fortios_system_interfacelist.switches.namelist
+
+    content {
+      interface_name = member.value
+    }
+  }
+
+  depends_on = [
+    fortios_system_interface.if
+   ]
+
+ }
 
 
 
@@ -58,7 +58,6 @@
 # #  #ip                    = "0.0.0.0 0.0.0.0"
 
 # #   device_identification = "enable"
-# #   allowaccess           = "ping"
 # #   mode                  = "static"
 # #   type                  = "physical"
 # #   vdom                  = "root"
@@ -69,8 +68,6 @@
 # #    ]
 
 
-# #   lifecycle {
-# #     create_before_destroy = true
-# #   }
-
 # # }
+
+# # This is setting the IP on the switch interface: idrac_ilo above ^^ - breaks whole terraform code after 2nd apply...
