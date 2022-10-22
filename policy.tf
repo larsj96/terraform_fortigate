@@ -119,20 +119,6 @@ resource "fortios_firewall_policy" "wifi_to_all" {
 
 
 
-
-
-# # data "fortios_system_interfacelist" "vlan_interfaces" {
-# #   filter = "type=@vlan"
-
-# #   depends_on = [
-# #     fortios_networking_interface_port.vlan
-# #   ]
-# # }
-
-# #  output vlans {
-# #    value =  fortios_networking_interface_port.vlan
-# #  }
-
 resource "fortios_firewall_policy" "bastion_til_alt" {
   action     = "accept"
   logtraffic = "all"
@@ -179,36 +165,6 @@ resource "fortios_firewall_policy" "all_to_wan" {
 
   service {
     name = "ALL"
-  }
-  srcaddr {
-    name = "all"
-  }
-  dynamic "srcintf" {
-    for_each = fortios_system_interface.vlan_cidr_calc
-    content {
-      name = srcintf.value.id
-    }
-  }
-}
-
-
-resource "fortios_firewall_policy" "all_to_dns" {
-  action     = "accept"
-  logtraffic = "all"
-  name       = "* --> DNS"
-  schedule   = "always"
-  nat        = "enable"
-
-  dstaddr {
-    name = "all"
-  }
-
-  dstintf {
-    name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_dns"].name
-  }
-
-  service {
-    name = "DNS"
   }
   srcaddr {
     name = "all"
