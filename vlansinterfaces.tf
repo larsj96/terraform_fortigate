@@ -34,7 +34,6 @@ locals {
   }
   subnett = {
     k8s     = 1
-    dns     = 2
     bastion = 3
     gitlab  = 4
     vmware  = 5

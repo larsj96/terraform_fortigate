@@ -1,3 +1,10 @@
+resource "fortios_system_setting_dns" "dns" {
+  primary   = "1.1.1.1"
+  secondary = "8.8.8.8"
+}
+
+
+
 
 # setting VMWARE VLAN / interface as recursive :-)
 resource "fortios_system_dnsserver" "vmware" {
