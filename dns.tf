@@ -14,12 +14,11 @@ resource "fortios_system_dnsserver" "all_interfaces" {
   ]
 }
 
-
 resource "fortios_system_dnsdatabase" "mgmt" {
   authoritative = "enable"
   contact       = "hostmaster"
   domain        = "mgmt.nilsen-tech.com"
-  forwarder     = "\"1.1.1.1\" "
+  forwarder     = "\"1.1.1.1\" \"8.8.8.8\"  "
   ip_master     = "0.0.0.0"
   name          = "mgmt.nilsen-tech.com"
   primary_name  = "dns"
@@ -107,7 +106,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "PTR"
     }
   }
-  
 }
 
 
