@@ -89,18 +89,18 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 #     }
 #   }
 
- # A RECORDS DYNAMIC
-  dynamic "dns_entry" {
-    for_each = local.vmware_vm_Ips
-    content {
-      hostname   = each.key
-      ip         = each.value
-      ipv6       = "::"
-      preference = 10
-      status     = "enable"
-      ttl        = 0
-      type       = "A"
-    }
-  }
+#  # A RECORDS DYNAMIC
+#   dynamic "dns_entry" {
+#     for_each = local.vmware_vm_Ips
+#     content {
+#       hostname   = each.key
+#       ip         = each.value
+#       ipv6       = "::"
+#       preference = 10
+#       status     = "enable"
+#       ttl        = 0
+#       type       = "A"
+#     }
+#   }
 
 }
