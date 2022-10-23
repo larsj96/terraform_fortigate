@@ -8,6 +8,23 @@ data "fortios_system_interfacelist" "switches" {
   filter = "alias=@mikrotik,alias=@xyzel"
 }
 
+data "terraform_remote_state" "vmware_vm" {
+  backend = "http"
+
+  config = { # this is the state for VMWARE_VM project
+    address = "http://10.0.0.130/api/v4/projects/3/terraform/state/main" # EXPORT TF_HTTP_ADDRESS env variable otherwise hardcode it here :-)
+    username = "terraform"
+  # password = "XXXXXXXX"
+  }
+}
+
+locals {
+  vmware_vm_Ips = data.terraform_remote_state.vmware_vm.outputs.all_ips
+}
+
+output "vmware_vm_Ips" {
+    value = local.vmware_vm_Ips
+}
 
 
 # data "http" "terraform_cloud" {
