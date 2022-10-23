@@ -82,6 +82,39 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "PTR"
   }
 
+  dynamic dns_entry {
+    for_each = local.vmware_vm_Ips 
+    content {
+    hostname   = dns_entry.key
+    ip         = dns_entry.value
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+    }
+  }
+
+    dynamic dns_entry {
+    for_each = local.vmware_vm_Ips 
+    content {
+    hostname   = dns_entry.key
+    ip         = dns_entry.value
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "PTR"
+    }
+  }
+  
+}
+
+
+
+
+
+
 #   dynamic "srcintf" {
 #     for_each = fortios_system_interface.vlan_cidr_calc
 #     content {
@@ -103,4 +136,3 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 #     }
 #   }
 
-}
