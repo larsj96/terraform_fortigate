@@ -38,6 +38,9 @@ locals {
     bastion = 3
     gitlab  = 4
     vmware  = 5
+    internal_lb = 6
+    external_lb = 7
+    sslvpn = 8
 
   }
 
