@@ -22,11 +22,10 @@ output "test" {
 resource "fortios_system_autoscript" "DateAndTime" {
   interval    = 120
   name        = "SET DATE AND TIME -"
-  output_size = 10
+  output_size = 1024
   repeat      = 0
 
   script = <<EOF
-
 
 
 #execute date "${formatdate("YYYY-MM-DD", "${timestamp()}")}"
@@ -34,5 +33,4 @@ resource "fortios_system_autoscript" "DateAndTime" {
 
 EOF
   start  = "auto"
-
 }

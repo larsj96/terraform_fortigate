@@ -34,9 +34,11 @@ locals {
   }
   subnett = {
     k8s     = 1
+    plex    = 2
     bastion = 3
     gitlab  = 4
     vmware  = 5
+
   }
 
   base_cidr_block = "10.0.0.0/16"
