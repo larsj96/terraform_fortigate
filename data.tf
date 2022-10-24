@@ -11,10 +11,10 @@ data "fortios_system_interfacelist" "switches" {
 data "terraform_remote_state" "vmware_vm" {
   backend = "http"
 
-  config = { # this is the state for VMWARE_VM project
-    address = "http://10.0.0.130/api/v4/projects/3/terraform/state/main" # EXPORT TF_HTTP_ADDRESS env variable otherwise hardcode it here :-)
+  config = {                                                              # this is the state for VMWARE_VM project
+    address  = "http://10.0.0.130/api/v4/projects/3/terraform/state/main" # EXPORT TF_HTTP_ADDRESS env variable otherwise hardcode it here :-)
     username = "terraform"
-  # password = "XXXXXXXX"
+    # password = "XXXXXXXX"
   }
 }
 
@@ -23,8 +23,18 @@ locals {
 }
 
 output "vmware_vm_Ips" {
-    value = local.vmware_vm_Ips
+  value = local.vmware_vm_Ips
 }
+
+data "fortios_system_interface" "wan_ip" {
+  name = "port9"
+}
+
+output "wan_ip" {
+  # this is taking away the CIDR from the WAN_IP / this is used to feed data to external DNS: cloudfare
+  value = split(" ", data.fortios_system_interface.wan_ip.ip)[0]
+}
+
 
 
 # data "http" "terraform_cloud" {
