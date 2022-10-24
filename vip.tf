@@ -56,5 +56,4 @@ resource "fortios_firewall_vip" "plex_docker1" {
     service {
         name = "plex"
     }
-
 }

@@ -252,6 +252,38 @@ resource "fortios_firewall_policy" "extlb_to_docker" {
     }
 }
 
+resource "fortios_firewall_policy" "wan_to_plex" {
+    action                      = "accept"
+    logtraffic                  = "all"
+    name                        = "WAN ->  docker1"
+    nat                         = "disable"
+    status                      = "enable"
+
+
+    dstaddr {
+        name = fortios_firewall_vip.plex_docker1.name
+    }
+
+    dstintf {
+        name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_k8s"].name #network where docker1 vm lays on :-) 
+    }
+
+    service {
+        name = "plex"
+    }
+
+
+    srcaddr {
+        name = "all"
+    }
+
+    srcintf {
+        name = "port9"
+    }
+}
+
+
+
 
 resource "fortios_firewallservice_custom" "influxdb" {
   app_service_type    = "disable"
