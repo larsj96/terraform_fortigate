@@ -26,35 +26,6 @@ resource "fortios_firewall_policy" "lan_wifi_to_idrac_ilo" {
   }
 }
 
-# resource "fortios_firewall_policy" "wifi_esxi_mgmt" {
-#   action     = "accept"
-#   logtraffic = "all"
-#   name       = "wifi_esxi_mgmt"
-#   schedule   = "always"
-#   nat        = "enable"
-
-#   dstaddr {
-#     name = "all"
-#   }
-
-#   dstintf {
-#     name = fortios_networking_interface_port.vlan["esxi_mgmt"].name
-#   }
-
-#   service {
-#     name = "ALL"
-#   }
-
-#   srcaddr {
-#     name = "all"
-#   }
-
-#   srcintf {
-#     name = "R21B_Wifi"
-#   }
-# }
-
-
 
 resource "fortios_firewall_policy" "wifi_switches" {
   action     = "accept"
@@ -198,6 +169,27 @@ resource "fortios_firewallservice_custom" "sonarr_radarr_jackett" {
   visibility          = "enable"
 }
 
+resource "fortios_firewallservice_custom" "plex" {
+  app_service_type    = "disable"
+  category            = "General"
+  check_reset_range   = "default"
+  color               = 0
+  helper              = "auto"
+  iprange             = "0.0.0.0"
+  name                = "plex"
+  protocol            = "TCP"
+  protocol_number     = 6
+  proxy               = "disable"
+  tcp_halfclose_timer = 0
+  tcp_halfopen_timer  = 0
+  tcp_portrange       = "32400-32400"
+  tcp_timewait_timer  = 0
+  udp_idle_timer      = 0
+  visibility          = "enable"
+}
+
+
+
 resource "fortios_firewall_policy" "extlb" {
     action                      = "accept"
     logtraffic                  = "all"
@@ -313,6 +305,41 @@ resource "fortios_firewall_policy" "alt_til_influxdbz" {
     fortios_firewallservice_custom.influxdb
   ]
 }
+
+resource "fortios_firewall_policy" "alt_til_plex" {
+  action     = "accept"
+  logtraffic = "all"
+  name       = "* --> plex 8086"
+  schedule   = "always"
+
+  dstaddr {
+    name = "all"
+  }
+
+  dstintf {
+    name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_k8s"].name
+  }
+
+  service {
+    name = fortios_firewallservice_custom.plex.name
+  }
+
+  srcaddr {
+    name = "all"
+  }
+
+  dynamic "srcintf" {
+    for_each = fortios_system_interface.vlan_cidr_calc
+    content {
+      name = srcintf.value.id
+    }
+  }
+
+  depends_on = [
+    fortios_firewallservice_custom.plex
+  ]
+}
+
 
 resource "fortios_firewall_policy" "alt_til_alt_icmp" {
   action     = "accept"
