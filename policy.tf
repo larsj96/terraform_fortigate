@@ -230,6 +230,37 @@ resource "fortios_firewall_policy" "extlb" {
     }
 }
 
+resource "fortios_firewall_policy" "extlb_to_docker" {
+    action                      = "accept"
+    logtraffic                  = "all"
+    name                        = "extlb1 ->  docker1"
+    nat                         = "disable"
+    status                      = "enable"
+
+
+    dstaddr {
+        name = "all"
+    }
+
+    dstintf {
+        name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_k8s"].name #network where docker1 vm lays on :-) 
+    }
+
+    service {
+        name = "ALL"
+    }
+
+
+    srcaddr {
+        name = "all"
+    }
+
+    srcintf {
+        name = "external_lb"
+    }
+}
+
+
 resource "fortios_firewallservice_custom" "influxdb" {
   app_service_type    = "disable"
   category            = "General"
@@ -254,7 +285,6 @@ resource "fortios_firewall_policy" "alt_til_influxdbz" {
   logtraffic = "all"
   name       = "* --> influxdbz 8086"
   schedule   = "always"
-  nat        = "enable"
 
   dstaddr {
     name = "all"
