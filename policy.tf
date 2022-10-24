@@ -198,6 +198,37 @@ resource "fortios_firewallservice_custom" "sonarr_radarr_jackett" {
   visibility          = "enable"
 }
 
+resource "fortios_firewall_policy" "extlb" {
+    action                      = "accept"
+    logtraffic                  = "all"
+    name                        = "WAN -> nginx extlb"
+    nat                         = "disable"
+    status                      = "enable"
+
+
+    dstaddr {
+        name = fortios_firewall_vip.extlb1.name
+    }
+
+    dstintf {
+        name = "external_lb"
+    }
+
+    service {
+        name = "HTTP"
+    }
+    service {
+        name = "HTTPS"
+    }
+
+    srcaddr {
+        name = "all"
+    }
+
+    srcintf {
+        name = "port9"
+    }
+}
 
 resource "fortios_firewallservice_custom" "influxdb" {
   app_service_type    = "disable"
