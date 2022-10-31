@@ -41,6 +41,7 @@ locals {
     internal_lb = 6
     external_lb = 7
     sslvpn = 8
+    work   = 9
 
   }
 
