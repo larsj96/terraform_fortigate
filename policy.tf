@@ -4,6 +4,7 @@ resource "fortios_firewall_policy" "lan_wifi_to_idrac_ilo" {
   name       = "wifi - idrac_ilo"
   schedule   = "always"
   nat        = "enable"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -33,6 +34,7 @@ resource "fortios_firewall_policy" "wifi_switches" {
   name       = "WIFI -> Switches"
   schedule   = "always"
   nat        = "enable"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -62,7 +64,7 @@ resource "fortios_firewall_policy" "wifi_to_all" {
   name       = "wifi --> *"
   schedule   = "always"
   nat        = "enable"
-
+comments = "Created by terraform"
   dstaddr {
     name = "all"
   }
@@ -96,6 +98,7 @@ resource "fortios_firewall_policy" "bastion_til_alt" {
   name       = "bastion --> *"
   schedule   = "always"
   nat        = "enable"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -125,6 +128,7 @@ resource "fortios_firewall_policy" "all_to_wan" {
   name       = " * --> WAN "
   schedule   = "always"
   nat        = "enable"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -196,6 +200,7 @@ resource "fortios_firewall_policy" "extlb" {
     name                        = "WAN -> nginx extlb"
     nat                         = "disable"
     status                      = "enable"
+    comments = "Created by terraform"
 
 
     dstaddr {
@@ -228,6 +233,7 @@ resource "fortios_firewall_policy" "extlb_to_docker" {
     name                        = "extlb1 ->  docker1"
     nat                         = "disable"
     status                      = "enable"
+    comments = "Created by terraform"
 
 
     dstaddr {
@@ -258,6 +264,7 @@ resource "fortios_firewall_policy" "wan_to_plex" {
     name                        = "WAN ->  docker1"
     nat                         = "disable"
     status                      = "enable"
+    comments = "Created by terraform"
 
 
     dstaddr {
@@ -309,6 +316,7 @@ resource "fortios_firewall_policy" "alt_til_influxdbz" {
   logtraffic = "all"
   name       = "* --> influxdbz 8086"
   schedule   = "always"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -343,6 +351,7 @@ resource "fortios_firewall_policy" "alt_til_plex" {
   logtraffic = "all"
   name       = "* --> plex 8086"
   schedule   = "always"
+  comments = "Created by terraform"
 
   dstaddr {
     name = "all"
@@ -379,6 +388,8 @@ resource "fortios_firewall_policy" "alt_til_alt_icmp" {
   name       = "* --> *  - ICMP"
   schedule   = "always"
   nat        = "enable"
+comments = "Created by terraform"
+
 
   dstaddr {
     name = "all"
