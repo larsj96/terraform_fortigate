@@ -27,6 +27,36 @@ resource "fortios_firewall_policy" "lan_wifi_to_idrac_ilo" {
   }
 }
 
+resource "fortios_firewall_policy" "homeassist_to_idrac_ilo" {
+  action     = "accept"
+  logtraffic = "all"
+  name       = "Home assisnt (HA) -> idrac_ilo"
+  schedule   = "always"
+  nat        = "enable"
+  comments = "Created by terraform"
+
+  dstaddr {
+    name = "all"
+  }
+
+  dstintf {
+    name = "idrac_Ilo"
+  }
+
+  service {
+    name = "ALL"
+  }
+
+  srcaddr {
+    name = "all"
+  }
+
+  srcintf {
+    name = "k8s"
+  }
+}
+
+
 
 resource "fortios_firewall_policy" "wifi_switches" {
   action     = "accept"
