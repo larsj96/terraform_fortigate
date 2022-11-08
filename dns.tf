@@ -81,6 +81,18 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "PTR"
   }
 
+
+  dns_entry {
+    hostname   = "ha"
+    id         = 8
+    ip         = "10.0.0.36"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
+
   dns_entry {
     hostname   = "ha"
     id         = 8
