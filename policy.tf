@@ -91,6 +91,40 @@ comments = "Created by terraform"
 }
 
 
+resource "fortios_firewall_policy" "switches_to_all" {
+  action     = "accept"
+  logtraffic = "all"
+  name       = "switches --> *"
+  schedule   = "always"
+  nat        = "enable"
+comments = "Created by terraform"
+  dstaddr {
+    name = "all"
+  }
+
+  # building dstintf bloc
+  dynamic "dstintf" {
+    for_each = fortios_system_interface.vlan_cidr_calc
+    content {
+      name = dstintf.value.id
+    }
+  }
+
+  service {
+    name = "ALL"
+  }
+
+  srcaddr {
+    name = "all"
+  }
+
+  srcintf {
+    name = "switches"
+  }
+}
+
+
+
 
 resource "fortios_firewall_policy" "bastion_til_alt" {
   action     = "accept"
