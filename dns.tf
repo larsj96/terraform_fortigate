@@ -84,7 +84,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "ha"
-    id         = 8
+ #   id         = 9
     ip         = "10.0.0.36"
     ipv6       = "::"
     preference = 10
@@ -95,7 +95,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "ha"
-    id         = 8
+  #  id         = 10
     ip         = "10.0.0.36"
     ipv6       = "::"
     preference = 10
