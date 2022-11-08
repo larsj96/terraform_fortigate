@@ -81,6 +81,19 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "PTR"
   }
 
+  dns_entry {
+    hostname   = "ha"
+    id         = 8
+    ip         = "10.0.0.35"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "PTR"
+  }
+
+
+
   dynamic dns_entry {
     for_each = local.vmware_vm_Ips 
     content {
