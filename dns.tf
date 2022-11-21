@@ -89,7 +89,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "raspberry"
-    ip         =  "192.168.254.2"
+    ip         = "192.168.254.2"
     ipv6       = "::"
     preference = 10
     status     = "enable"
@@ -110,29 +110,29 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
 
 
-  dynamic dns_entry {
-    for_each = local.vmware_vm_Ips 
+  dynamic "dns_entry" {
+    for_each = local.vmware_vm_Ips
     content {
-    hostname   = dns_entry.key
-    ip         = dns_entry.value
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "A"
+      hostname   = dns_entry.key
+      ip         = dns_entry.value
+      ipv6       = "::"
+      preference = 10
+      status     = "enable"
+      ttl        = 0
+      type       = "A"
     }
   }
 
-    dynamic dns_entry {
-    for_each = local.vmware_vm_Ips 
+  dynamic "dns_entry" {
+    for_each = local.vmware_vm_Ips
     content {
-    hostname   = dns_entry.key
-    ip         = dns_entry.value
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "PTR"
+      hostname   = dns_entry.key
+      ip         = dns_entry.value
+      ipv6       = "::"
+      preference = 10
+      status     = "enable"
+      ttl        = 0
+      type       = "PTR"
     }
   }
 }

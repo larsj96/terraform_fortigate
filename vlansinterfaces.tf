@@ -33,15 +33,15 @@ locals {
     # number 3 available for future expansion
   }
   subnett = {
-    k8s     = 1
-    plex    = 2
-    bastion = 3
-    gitlab  = 4
-    vmware  = 5
+    k8s         = 1
+    plex        = 2
+    bastion     = 3
+    gitlab      = 4
+    vmware      = 5
     internal_lb = 6
     external_lb = 7
-    sslvpn = 8
-    work   = 9
+    sslvpn      = 8
+    work        = 9
 
   }
 
