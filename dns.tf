@@ -31,7 +31,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "hp3"
-    id         = 3
     ip         = "10.0.0.162"
     ipv6       = "::"
     preference = 10
@@ -41,7 +40,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
   dns_entry {
     hostname   = "hp1"
-    id         = 4
     ip         = "192.168.13.7"
     ipv6       = "::"
     preference = 10
@@ -51,7 +49,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
   dns_entry {
     hostname   = "hp2"
-    id         = 5
     ip         = "10.1.1.2"
     ipv6       = "::"
     preference = 10
@@ -62,7 +59,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "vcsa"
-    id         = 7
     ip         = "10.0.0.163"
     ipv6       = "::"
     preference = 10
@@ -72,7 +68,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
   dns_entry {
     hostname   = "vcsa"
-    id         = 8
     ip         = "10.0.0.163"
     ipv6       = "::"
     preference = 10
@@ -84,7 +79,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "ha"
- #   id         = 9
     ip         = "10.0.0.36"
     ipv6       = "::"
     preference = 10
@@ -94,8 +88,18 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
 
   dns_entry {
+    hostname   = "raspberry"
+    ip         =  "192.168.254.2"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
+
+
+  dns_entry {
     hostname   = "ha"
-  #  id         = 10
     ip         = "10.0.0.36"
     ipv6       = "::"
     preference = 10
