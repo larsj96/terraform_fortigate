@@ -38,6 +38,18 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     ttl        = 0
     type       = "A"
   }
+
+  dns_entry {
+    hostname   = "dell1"
+    ip         = "10.0.0.165"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
+
+
   dns_entry {
     hostname   = "hp1"
     ip         = "192.168.13.7"
