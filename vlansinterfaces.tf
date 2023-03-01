@@ -42,7 +42,8 @@ locals {
     external_lb = 7
     sslvpn      = 8
     work        = 9
-
+    ely_k8s    = 10
+    ely_mgmt   = 11
   }
 
   base_cidr_block = "10.0.0.0/16"
