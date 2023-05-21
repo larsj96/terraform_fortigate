@@ -7,12 +7,17 @@ terraform {
     }
   }
 
-  backend "http" {
+  cloud {
+    organization = "lanilsen"
+
+    workspaces {
+      name = "fortigate"
+    }
   }
 
-}
 
-provider "fortios" {
+
+
 }
 
 

@@ -28,7 +28,7 @@ locals {
   # each zone then requiring five subnet addressing
   # bits in total.
   regions = {
-    fortigate_onprem_ = 0
+    fortigate_onprem_ = 0 
     azure_north_eu_   = 1
     # number 3 available for future expansion
   }
@@ -44,6 +44,8 @@ locals {
     work        = 9
     ely_k8s    = 10
     ely_mgmt   = 11
+    ad         = 12
+    exchange   = 13
   }
 
   base_cidr_block = "10.0.0.0/16"
@@ -60,7 +62,6 @@ locals {
       }
     }
   }
-
 
 }
 

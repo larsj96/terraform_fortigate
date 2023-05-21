@@ -17,7 +17,8 @@ resource "fortios_firewall_vip" "extlb1" {
 
 
   mappedip {
-    range = local.vmware_vm_Ips.extlb1
+    #range = local.vmware_vm_Ips.extlb1
+    range = "10.0.0.227"
   }
 
   service {
@@ -50,7 +51,8 @@ resource "fortios_firewall_vip" "plex_docker1" {
 
 
   mappedip {
-    range = local.vmware_vm_Ips.docker1
+    #range = local.vmware_vm_Ips.docker1
+    range = "10.0.0.34"
   }
 
   service {

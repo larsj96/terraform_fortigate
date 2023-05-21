@@ -52,7 +52,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
   dns_entry {
     hostname   = "hp1"
-    ip         = "192.168.13.7"
+    ip         = "192.168.13.6"
     ipv6       = "::"
     preference = 10
     status     = "enable"
@@ -122,31 +122,34 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
 
 
-  dynamic "dns_entry" {
-    for_each = local.vmware_vm_Ips
-    content {
-      hostname   = dns_entry.key
-      ip         = dns_entry.value
-      ipv6       = "::"
-      preference = 10
-      status     = "enable"
-      ttl        = 0
-      type       = "A"
-    }
-  }
+  # dynamic "dns_entry" {
+  #   for_each = local.vmware_vm_Ips
+  #   content {
+  #     hostname   = dns_entry.key
+  #     ip         = dns_entry.value
+  #     ipv6       = "::"
+  #     preference = 10
+  #     status     = "enable"
+  #     ttl        = 0
+  #     type       = "A"
+  #   }
+  # }
 
-  dynamic "dns_entry" {
-    for_each = local.vmware_vm_Ips
-    content {
-      hostname   = dns_entry.key
-      ip         = dns_entry.value
-      ipv6       = "::"
-      preference = 10
-      status     = "enable"
-      ttl        = 0
-      type       = "PTR"
-    }
-  }
+  # dynamic "dns_entry" {
+  #   for_each = local.vmware_vm_Ips
+  #   content {
+  #     hostname   = dns_entry.key
+  #     ip         = dns_entry.value
+  #     ipv6       = "::"
+  #     preference = 10
+  #     status     = "enable"
+  #     ttl        = 0
+  #     type       = "PTR"
+  #   }
+  # }
+
+
+
 }
 
 
