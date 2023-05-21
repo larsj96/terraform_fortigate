@@ -69,17 +69,6 @@ locals {
 
 
 
-output "networks" {
-  value = {
-    networks = {
-      cidr_block = local.base_cidr_block
-      regions    = local.region_blocks
-      subnets    = local.subnetts_block
-    }
-  }
-}
-
-
 resource "fortios_system_interface" "vlan_cidr_calc" {
   for_each = local.subnetts_block.fortigate_onprem_
 

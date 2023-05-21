@@ -61,7 +61,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
   dns_entry {
     hostname   = "hp2"
-    ip         = "10.1.1.2"
+    ip         = "10.0.0.169"
     ipv6       = "::"
     preference = 10
     status     = "enable"
