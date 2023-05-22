@@ -88,6 +88,27 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "PTR"
   }
 
+  dns_entry {
+    hostname   = "vcsa_pa"
+    ip         = "10.0.0.172"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
+  dns_entry {
+    hostname   = "vcsa_pa"
+    ip         = "10.0.0.172"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "PTR"
+  }
+
+
+
 
   dns_entry {
     hostname   = "ha"
