@@ -47,6 +47,7 @@ locals {
     ad         = 12
     exchange   = 13
     vmotion    = 14
+    lindelab   = 15
   }
 
   base_cidr_block = "10.0.0.0/16"
