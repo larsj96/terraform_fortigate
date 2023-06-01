@@ -27,6 +27,36 @@ resource "fortios_firewall_policy" "lan_wifi_to_idrac_ilo" {
   }
 }
 
+resource "fortios_firewall_policy" "nessus_til_alt" {
+  action     = "accept"
+  logtraffic = "all"
+  name       = "nessus ---> *"
+  schedule   = "always"
+  nat        = "enable"
+  comments   = "Created by terraform"
+
+  dstaddr {
+    name = "all"
+  }
+
+  # building dstintf bloc
+  dynamic "dstintf" {
+    for_each = fortios_system_interface.vlan_cidr_calc
+    content {
+      name = dstintf.value.id
+    }
+  }
+  service {
+    name = "ALL"
+  }
+  srcaddr {
+    name = "all"
+  }
+  srcintf {
+    name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_nessus"].name
+  }
+}
+
 resource "fortios_firewall_policy" "homeassist_to_idrac_ilo" {
   action     = "accept"
   logtraffic = "all"
@@ -55,6 +85,8 @@ resource "fortios_firewall_policy" "homeassist_to_idrac_ilo" {
     name = "k8s"
   }
 }
+
+
 
 
 
