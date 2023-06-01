@@ -129,6 +129,17 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     ttl        = 0
     type       = "A"
   }
+  
+  dns_entry {
+    hostname   = "docker1"
+    ip         = "10.0.0.34"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
+
 
 
   dns_entry {
