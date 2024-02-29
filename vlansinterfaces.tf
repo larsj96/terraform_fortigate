@@ -1,4 +1,3 @@
-
 # # Old way to set VLAN - fortios_networking_interface_port is EOL and might not work in future terraform version
 # resource "fortios_networking_interface_port" "vlan" {
 #   for_each = var.vlan_interfaces
@@ -42,8 +41,6 @@ locals {
     external_lb = 7
     sslvpn      = 8
     work        = 9
-    ely_k8s    = 10
-    ely_mgmt   = 11
     ad         = 12
     exchange   = 13
     vmotion    = 14
