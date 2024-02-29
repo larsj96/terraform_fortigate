@@ -39,20 +39,11 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "A"
   }
 
-  dns_entry {
-    hostname   = "dell1"
-    ip         = "10.0.0.165"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "A"
-  }
 
 
   dns_entry {
     hostname   = "hp1"
-    ip         = "192.168.13.6"
+    ip         = "192.168.13.8"
     ipv6       = "::"
     preference = 10
     status     = "enable"
@@ -61,7 +52,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   }
   dns_entry {
     hostname   = "hp2"
-    ip         = "10.0.0.169"
+    ip         = "192.168.13.5"
     ipv6       = "::"
     preference = 10
     status     = "enable"
@@ -78,47 +69,8 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     ttl        = 0
     type       = "A"
   }
-  dns_entry {
-    hostname   = "vcsa"
-    ip         = "10.0.0.163"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "PTR"
-  }
-
-  dns_entry {
-    hostname   = "vcsa_pa"
-    ip         = "10.0.0.172"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "A"
-  }
-  dns_entry {
-    hostname   = "vcsa_pa"
-    ip         = "10.0.0.172"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "PTR"
-  }
 
 
-
-
-  dns_entry {
-    hostname   = "ha"
-    ip         = "10.0.0.36"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "A"
-  }
 
   dns_entry {
     hostname   = "raspberry"
@@ -142,15 +94,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 
 
 
-  dns_entry {
-    hostname   = "ha"
-    ip         = "10.0.0.36"
-    ipv6       = "::"
-    preference = 10
-    status     = "enable"
-    ttl        = 0
-    type       = "PTR"
-  }
+ 
 
 
 
