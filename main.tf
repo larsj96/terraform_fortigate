@@ -14,12 +14,10 @@ terraform {
       name = "fortigate"
     }
   }
-
-
-
-
 }
 
+
+provider "fortios" {}
 
 
 

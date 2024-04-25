@@ -395,6 +395,41 @@ resource "fortios_firewall_policy" "extlb_to_docker" {
   }
 }
 
+
+resource "fortios_firewall_policy" "WAN-to-FTP1" {
+  action     = "accept"
+  logtraffic = "all"
+  name       = "WAN (Traffic Manager) ->  SFTP"
+  nat        = "disable"
+  status     = "enable"
+  comments   = "Created by terraform"
+
+
+  dstaddr {
+    name = "all"
+  }
+
+  dstintf {
+    name = fortios_system_interface.vlan_cidr_calc["fortigate_onprem_ftp"].name #network where ftp1 vm lays on :-) 
+  }
+
+
+  service {
+    name = "FTP"
+  }
+
+  srcaddr {
+    name = "all"
+  }
+
+  srcintf {
+    name = "port9" #port 9 WAN interface!
+  }
+}
+
+
+
+
 resource "fortios_firewall_policy" "wan_to_plex" {
   action     = "accept"
   logtraffic = "all"
