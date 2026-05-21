@@ -7,13 +7,7 @@ terraform {
     }
   }
 
-  cloud {
-    organization = "lanilsen"
-
-    workspaces {
-      name = "fortigate"
-    }
-  }
+  backend "s3" {}
 }
 
 
