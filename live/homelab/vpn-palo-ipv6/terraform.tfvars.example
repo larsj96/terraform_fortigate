@@ -1,0 +1,22 @@
+fortios_hostname = "https://10.0.0.33:444"
+
+# Prefer setting secrets with environment variables:
+# export TF_VAR_fortios_token='...'
+# export TF_VAR_pre_shared_key='...'
+
+wan_interface = "wan"
+
+# Use global Starlink IPv6 addresses, not fe80:: link-local.
+fortigate_wan_ipv6 = null
+palo_peer_ipv6     = "2001:db8::replace-me"
+
+tunnel_name        = "palo-ipv6-s2s"
+fortigate_local_id = "fortigate-mo-ipv6"
+palo_peer_id       = "pa510-homelab-ljn-ipv6"
+
+local_subnets  = ["10.0.0.0/16"]
+remote_subnets = ["10.1.0.0/16"]
+
+# Narrow this after the first tunnel is proven. "any" is lab-friendly for bootstrap.
+source_interfaces = ["any"]
+enable_nat_traversal = false
