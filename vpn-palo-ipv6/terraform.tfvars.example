@@ -1,0 +1,11 @@
+phase1_name         = "palo-ipv6"
+wan_interface       = "port9"
+fortigate_wan_ipv6  = "2a0d:3341:bb00:6320:a5b:eff:feca:b2e9"
+palo_peer_ipv6      = "2a0d:3341:bb9c:af01::443"
+local_id            = "fortigate-mo-ipv6"
+palo_peer_id        = "pa510-homelab-ljn-ipv6"
+fortigate_local_subnets = ["10.0.0.0/16"]
+palo_remote_subnets     = ["10.1.0.0/16"]
+fortigate_local_ipv6_subnets = []
+palo_remote_ipv6_subnets     = []
+inside_interfaces       = ["k8s", "plex", "bastion", "vmware", "work", "idrac_Ilo"]

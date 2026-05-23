@@ -17,6 +17,8 @@ Routing preference:
 
 The direct IPv6 route must stay lower distance than the VPS fallback route. The fallback route exists on the Fortigate as route sequence `10` and is deliberately secondary.
 
+NAT traversal is forced for the direct Starlink IPv6 tunnel. Without UDP encapsulation, IKE and the SA came up, but WSL/PC traffic had one-way data-plane symptoms: Palo encapsulated packets into `tunnel.20`, but no useful decap/return traffic was seen. After forcing NAT-T and committing Palo, WSL could reach Fortigate, Proxmox, and routed VMs over the direct tunnel.
+
 The stack uses the newer `fortios_vpnipsec_phase1interface` and `fortios_vpnipsec_phase2interface` resources because the old root Fortigate stack is pinned to a provider version that does not expose IPv6 IPsec gateway fields cleanly.
 
 Before applying, confirm both firewalls have global IPv6 addresses on their WAN interfaces and can ping each other over IPv6. `fe80::` link-local addresses are not enough.

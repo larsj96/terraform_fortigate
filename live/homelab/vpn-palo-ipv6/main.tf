@@ -15,7 +15,7 @@ resource "fortios_vpnipsec_phase1interface" "palo" {
   localid_type      = "fqdn"
   peertype          = "one"
   peerid            = var.palo_peer_id
-  nattraversal      = var.enable_nat_traversal ? "enable" : "disable"
+  nattraversal      = var.nat_traversal
   dpd               = "on-idle"
   dpd_retryinterval = "10"
   comments          = "Terraform: site-to-site VPN to Palo Alto using IPv6 transport and IPv4 protected networks."

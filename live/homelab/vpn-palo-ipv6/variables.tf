@@ -116,10 +116,15 @@ variable "dh_groups" {
   default     = "14"
 }
 
-variable "enable_nat_traversal" {
-  description = "Enable NAT-T. For pure IPv6 transport this is normally unnecessary, but keep it configurable for lab testing."
-  type        = bool
-  default     = false
+variable "nat_traversal" {
+  description = "Fortigate NAT traversal mode. Use forced for Starlink IPv6 so IPsec data is UDP-encapsulated instead of raw ESP."
+  type        = string
+  default     = "forced"
+
+  validation {
+    condition     = contains(["enable", "disable", "forced"], var.nat_traversal)
+    error_message = "nat_traversal must be one of: enable, disable, forced."
+  }
 }
 
 variable "phase1_keylife_seconds" {
