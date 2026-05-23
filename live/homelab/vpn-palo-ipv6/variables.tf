@@ -135,7 +135,7 @@ variable "phase2_keylife_seconds" {
 }
 
 variable "route_distance" {
-  description = "Static route distance for remote Palo Alto subnets."
+  description = "Static route distance for remote Palo Alto subnets over the direct IPv6 tunnel. Keep lower than the VPS fallback route."
   type        = number
-  default     = 10
+  default     = 5
 }

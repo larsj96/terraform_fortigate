@@ -7,6 +7,16 @@ IPv6 is used only as the IKE/IPsec transport between the firewalls. The protecte
 - Fortigate side: `10.0.0.0/16`
 - Palo Alto side: `10.1.0.0/16`
 
+Routing preference:
+
+```text
+10.1.0.0/16 -> palo-ipv6 direct Palo Alto IPv6 IPsec, distance 5
+10.1.0.0/16 -> to-hostinger Frankfurt VPS fallback, distance 50
+10.8.0.0/24 -> to-hostinger Frankfurt VPS hub, distance 10
+```
+
+The direct IPv6 route must stay lower distance than the VPS fallback route. The fallback route exists on the Fortigate as route sequence `10` and is deliberately secondary.
+
 The stack uses the newer `fortios_vpnipsec_phase1interface` and `fortios_vpnipsec_phase2interface` resources because the old root Fortigate stack is pinned to a provider version that does not expose IPv6 IPsec gateway fields cleanly.
 
 Before applying, confirm both firewalls have global IPv6 addresses on their WAN interfaces and can ping each other over IPv6. `fe80::` link-local addresses are not enough.
