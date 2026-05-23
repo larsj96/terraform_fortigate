@@ -23,6 +23,18 @@ The stack uses the newer `fortios_vpnipsec_phase1interface` and `fortios_vpnipse
 
 Before applying, confirm both firewalls have global IPv6 addresses on their WAN interfaces and can ping each other over IPv6. `fe80::` link-local addresses are not enough.
 
+## TCP MSS Clamp
+
+The IPv6 Starlink site-to-site tunnel carries IPv4 LAN traffic inside IPsec/NAT-T. That path has enough encapsulation overhead and jitter that normal TCP sessions can collapse into tiny congestion windows even while ping and UDP tests look acceptable.
+
+This stack clamps TCP MSS on both Fortigate firewall policies with `vpn_tcp_mss`, defaulting to `1300`:
+
+```hcl
+vpn_tcp_mss = 1300
+```
+
+Keep this enabled for Plex and other long-lived TCP streams across the Palo Alto to Fortigate tunnel. If tests still show retransmits, test `1280`; if the path becomes clean and stable, `1360` can be tested later.
+
 ## Run
 
 ```bash

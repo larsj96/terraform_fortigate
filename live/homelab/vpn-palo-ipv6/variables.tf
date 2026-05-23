@@ -144,3 +144,10 @@ variable "route_distance" {
   type        = number
   default     = 5
 }
+
+variable "vpn_tcp_mss" {
+  description = "TCP MSS clamp for traffic crossing the IPv6 IPsec tunnel. Keep below the effective Starlink/NAT-T/IPsec path MTU to avoid TCP retransmits."
+  type        = number
+  default     = 1300
+  nullable    = true
+}

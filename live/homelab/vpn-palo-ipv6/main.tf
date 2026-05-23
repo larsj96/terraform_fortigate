@@ -75,12 +75,14 @@ resource "fortios_router_static" "remote" {
 }
 
 resource "fortios_firewall_policy" "local_to_palo" {
-  name       = "local-to-palo-ipv6-s2s"
-  action     = "accept"
-  schedule   = "always"
-  logtraffic = "all"
-  nat        = "disable"
-  comments   = "Terraform: allow Fortigate local subnets to Palo Alto over IPv6 site-to-site VPN."
+  name             = "local-to-palo-ipv6-s2s"
+  action           = "accept"
+  schedule         = "always"
+  logtraffic       = "all"
+  nat              = "disable"
+  tcp_mss_sender   = var.vpn_tcp_mss
+  tcp_mss_receiver = var.vpn_tcp_mss
+  comments         = "Terraform: allow Fortigate local subnets to Palo Alto over IPv6 site-to-site VPN."
 
   dynamic "srcintf" {
     for_each = toset(var.source_interfaces)
@@ -113,12 +115,14 @@ resource "fortios_firewall_policy" "local_to_palo" {
 }
 
 resource "fortios_firewall_policy" "palo_to_local" {
-  name       = "palo-to-local-ipv6-s2s"
-  action     = "accept"
-  schedule   = "always"
-  logtraffic = "all"
-  nat        = "disable"
-  comments   = "Terraform: allow Palo Alto subnets to Fortigate local subnets over IPv6 site-to-site VPN."
+  name             = "palo-to-local-ipv6-s2s"
+  action           = "accept"
+  schedule         = "always"
+  logtraffic       = "all"
+  nat              = "disable"
+  tcp_mss_sender   = var.vpn_tcp_mss
+  tcp_mss_receiver = var.vpn_tcp_mss
+  comments         = "Terraform: allow Palo Alto subnets to Fortigate local subnets over IPv6 site-to-site VPN."
 
   srcintf {
     name = fortios_vpnipsec_phase1interface.palo.name
