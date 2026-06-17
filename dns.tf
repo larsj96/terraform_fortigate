@@ -39,8 +39,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "A"
   }
 
-
-
   dns_entry {
     hostname   = "hp1"
     ip         = "192.168.13.8"
@@ -50,6 +48,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     ttl        = 0
     type       = "A"
   }
+
   dns_entry {
     hostname   = "hp2"
     ip         = "192.168.13.5"
@@ -70,8 +69,6 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "A"
   }
 
-
-
   dns_entry {
     hostname   = "raspberry"
     ip         = "192.168.254.2"
@@ -81,7 +78,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     ttl        = 0
     type       = "A"
   }
-  
+
   dns_entry {
     hostname   = "docker1"
     ip         = "10.0.0.34"
@@ -92,11 +89,15 @@ resource "fortios_system_dnsdatabase" "mgmt" {
     type       = "A"
   }
 
-
-
- 
-
-
+  dns_entry {
+    hostname   = "media1"
+    ip         = "10.0.0.39"
+    ipv6       = "::"
+    preference = 10
+    status     = "enable"
+    ttl        = 0
+    type       = "A"
+  }
 
   # dynamic "dns_entry" {
   #   for_each = local.vmware_vm_Ips
@@ -123,15 +124,7 @@ resource "fortios_system_dnsdatabase" "mgmt" {
   #     type       = "PTR"
   #   }
   # }
-
-
-
 }
-
-
-
-
-
 
 #   dynamic "srcintf" {
 #     for_each = fortios_system_interface.vlan_cidr_calc
@@ -153,4 +146,3 @@ resource "fortios_system_dnsdatabase" "mgmt" {
 #       type       = "A"
 #     }
 #   }
-
