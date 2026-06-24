@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     fortios = {
@@ -10,9 +9,4 @@ terraform {
   backend "s3" {}
 }
 
-
 provider "fortios" {}
-
-
-
-
